@@ -49,34 +49,37 @@ public class StatsCalculator {
     //public double calculateFirstQuartile() - finds the value of the first quartile. Please note that I exclude the median for calculating the quartiles
     public double calculateFirstQuartile() {
         int index = 0;
-        if (sortedValues.length % 2 == 1) {
-            index = (sortedValues.length + 1) / 4;
+        if (sortedValues.length % 2 == 0) {
+            index = (sortedValues.length) / 4;
+            return sortedValues[index];
 
-        } else if (sortedValues.length % 2 == 0) {
-            return (sortedValues[(sortedValues.length + 1) / 4] + sortedValues[(sortedValues.length + 1) / 4 + 1] / 2);
+        } else {
+            return (sortedValues[(sortedValues.length) / 4] + sortedValues[(sortedValues.length) / 4 + 1] / 2);
         }
-        return sortedValues[index];
     }
 
     //public double calculateThirdQuartile() - finds the value of the third quartile. Please note that I exclude the median for calculating the quartiles
     public double calculateThirdQuartile() {
         int inx = 0;
-        if (sortedValues.length % 2 == 1) {
-            inx = (sortedValues.length + 1) * (3 / 4);
-        } else if (sortedValues.length % 2 == 0) {
-            return (sortedValues[(sortedValues.length + 1) * (3 / 4)] + sortedValues[(sortedValues.length + 1) * (3 / 4) + 1] / 2);
+        if (sortedValues.length % 2 == 0) {
+            inx = (sortedValues.length) * (3.0 / 4.0);
+            return sortedValues[inx];
+        } else  {
+            return (sortedValues[(sortedValues.length) * (3 / 4)] + sortedValues[(sortedValues.length) * (3 / 4) + 1] / 2);
         }
-        return sortedValues[inx];
+
     }
 
     //public double calculateMedian() - finds the value of the median
     public double calculateMedian() {
         int inx = 0;
         if (sortedValues.length % 2 == 1) {
-            inx = (sortedValues.length + 1) / 2;
+            inx = (sortedValues.length) / 2;
             return sortedValues[inx];
         } else if (sortedValues.length % 2 == 0) {
-            return (sortedValues[(sortedValues.length + 1) / 2] + sortedValues[(sortedValues.length + 1) / 2 + 1] / 2);
+            double num= sortedValues[(sortedValues.length) / 2] + sortedValues[(sortedValues.length) / 2 + 1];
+            num=num/2;
+            return num;
         }
         return sortedValues[inx];
     }
@@ -98,23 +101,24 @@ public class StatsCalculator {
     //public void print() - prints the data in a single line. Must use an enhanced for loop
     public void print() {
         for (double i : values) {
-            System.out.print(i);
+            System.out.print(i+" ");
         }
     }
 
     //public void printSorted() - prints the sorted data in a single line. Must use an enhanced for loop
     public void printSorted() {
         for (double i : sortedValues) {
-            System.out.print(i);
+            System.out.print(i + " ");
         }
     }
 
     //public void printFiveNumberSummary() - prints the five number summary as shown below.
     public void printFiveNumberSummary() {
-        System.out.println("Minimum: " + calculateMin());
-        System.out.println("First Quartile: " + calculateFirstQuartile());
-        System.out.println("Median: " + calculateMedian());
-        System.out.println("Third Quartile: " + calculateThirdQuartile());
-        System.out.println("Maximum: " + calculateMax());
+        System.out.println();
+        System.out.println("\tMinimum: " + calculateMin());
+        System.out.println("\tFirst Quartile: " + calculateFirstQuartile());
+        System.out.println("\tMedian: " + calculateMedian());
+        System.out.println("\tThird Quartile: " + calculateThirdQuartile());
+        System.out.println("\tMaximum: " + calculateMax());
     }
 }
