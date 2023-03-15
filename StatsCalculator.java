@@ -48,6 +48,7 @@ public class StatsCalculator {
 
     //public double calculateFirstQuartile() - finds the value of the first quartile. Please note that I exclude the median for calculating the quartiles
     public double calculateFirstQuartile() {
+        sortData();
         int index = 0;
         if (sortedValues.length % 2 == 0) {
             index = (sortedValues.length) / 4;
@@ -60,12 +61,17 @@ public class StatsCalculator {
 
     //public double calculateThirdQuartile() - finds the value of the third quartile. Please note that I exclude the median for calculating the quartiles
     public double calculateThirdQuartile() {
+        sortData();
         int inx = 0;
-        if (sortedValues.length % 2 == 0) {
-            inx = (sortedValues.length) * (3.0 / 4.0);
-            return sortedValues[inx];
-        } else  {
-            return (sortedValues[(sortedValues.length) * (3 / 4)] + sortedValues[(sortedValues.length) * (3 / 4) + 1] / 2);
+        double [] secHalf;
+        if(values.length%2==0){
+            secHalf=new double[values.length/2];
+        for(int i =0;i<values.length-1;i++){
+            secHalf[i]= sortedValues[sortedValues.length/2+i];
+        }
+        }
+        else{
+
         }
 
     }
