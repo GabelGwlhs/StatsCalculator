@@ -50,44 +50,49 @@ public class StatsCalculator {
     public double calculateFirstQuartile() {
         sortData();
         int index = 0;
-        if (sortedValues.length % 2 == 0) {
-            index = (sortedValues.length) / 4;
-            return sortedValues[index];
+        double [] firstHalf;
+        if (sortedValues.length % 2 == 1) {
+            firstHalf = new double [sortedValues.length/2+1];
+            for(int i =0;i<firstHalf.length;i++){
+                firstHalf[i] = sortedValues[i];
+            }
+            return firstHalf[firstHalf.length/2];
 
-        } else {
-            return (sortedValues[(sortedValues.length) / 4] + sortedValues[(sortedValues.length) / 4 + 1] / 2);
+            return sortedValues[sortedValues.length/2];
+        } else  {
+            double num= sortedValues[(sortedValues.length) / 2-1] + sortedValues[(sortedValues.length) / 2 ];
+            num=num/2;
+            return num;
         }
     }
 
     //public double calculateThirdQuartile() - finds the value of the third quartile. Please note that I exclude the median for calculating the quartiles
     public double calculateThirdQuartile() {
         sortData();
-        int inx = 0;
-        double [] secHalf;
-        if(values.length%2==0){
-            secHalf=new double[values.length/2];
-        for(int i =0;i<values.length-1;i++){
-            secHalf[i]= sortedValues[sortedValues.length/2+i];
-        }
-        }
-        else{
+        int index = 0;
+        if (sortedValues.length % 2 == 0) {
+            index = (sortedValues.length) / 3/4;
+            return sortedValues[index];
 
+        } else {
+            return (sortedValues[(sortedValues.length) / 3/4] + sortedValues[(sortedValues.length) /3/4 + 1] / 2);
         }
-
     }
+
+
 
     //public double calculateMedian() - finds the value of the median
     public double calculateMedian() {
+        sortData();
         int inx = 0;
         if (sortedValues.length % 2 == 1) {
-            inx = (sortedValues.length) / 2;
-            return sortedValues[inx];
-        } else if (sortedValues.length % 2 == 0) {
-            double num= sortedValues[(sortedValues.length) / 2] + sortedValues[(sortedValues.length) / 2 + 1];
+            return sortedValues[sortedValues.length/2];
+        } else  {
+            double num= sortedValues[(sortedValues.length) / 2-1] + sortedValues[(sortedValues.length) / 2 ];
             num=num/2;
             return num;
         }
-        return sortedValues[inx];
+
     }
 
     //public double calculateSum() - finds the sum of the array
@@ -113,6 +118,7 @@ public class StatsCalculator {
 
     //public void printSorted() - prints the sorted data in a single line. Must use an enhanced for loop
     public void printSorted() {
+        System.out.println();
         for (double i : sortedValues) {
             System.out.print(i + " ");
         }
