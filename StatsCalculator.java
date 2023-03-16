@@ -50,32 +50,58 @@ public class StatsCalculator {
     public double calculateFirstQuartile() {
         sortData();
         int index = 0;
-        double [] firstHalf;
+        double[] firstHalf;
         if (sortedValues.length % 2 == 1) {
-            firstHalf = new double [sortedValues.length/2+1];
-            for(int i =0;i<firstHalf.length;i++){
+            firstHalf = new double[sortedValues.length / 2];
+            for (int i = 0; i < firstHalf.length; i++) {
                 firstHalf[i] = sortedValues[i];
             }
-            return firstHalf[firstHalf.length/2];
+            return (firstHalf[firstHalf.length / 2] + firstHalf[firstHalf.length / 2 - 1]) / 2.0;
 
-            return sortedValues[sortedValues.length/2];
-        } else  {
-            double num= sortedValues[(sortedValues.length) / 2-1] + sortedValues[(sortedValues.length) / 2 ];
-            num=num/2;
-            return num;
+
+        } else {
+            firstHalf = new double[sortedValues.length / 2];
+            for (int i = 0; i < firstHalf.length - 1; i++) {
+                firstHalf[i] = sortedValues[i];}
+            if(firstHalf.length%2==1) {
+                return firstHalf[firstHalf.length / 2];
+            }else{
+                return (firstHalf[firstHalf.length / 2] + firstHalf[firstHalf.length / 2 - 1]) / 2.0;
+                }
+
+
         }
     }
 
     //public double calculateThirdQuartile() - finds the value of the third quartile. Please note that I exclude the median for calculating the quartiles
     public double calculateThirdQuartile() {
         sortData();
-        int index = 0;
-        if (sortedValues.length % 2 == 0) {
-            index = (sortedValues.length) / 3/4;
-            return sortedValues[index];
 
-        } else {
-            return (sortedValues[(sortedValues.length) / 3/4] + sortedValues[(sortedValues.length) /3/4 + 1] / 2);
+        double [] lastHalf;
+        if (sortedValues.length % 2 == 1) {
+            lastHalf = new double [sortedValues.length/2];
+            int indxLast=0;
+            for(int i =sortedValues.length/2+1;i<sortedValues.length;i++){
+                lastHalf[indxLast] = sortedValues[i];
+                indxLast++;
+            }
+            return (lastHalf[lastHalf.length/2]+lastHalf[lastHalf.length/2-1])/2;
+
+
+        } else  {
+            lastHalf= new double [sortedValues.length/2];
+            int indxLast=0;
+            for(int i =sortedValues.length/2;i<sortedValues.length-1;i++){
+                lastHalf[indxLast] = sortedValues[i];
+                indxLast++;
+            }
+            if(lastHalf.length%2==1) {
+                return lastHalf[lastHalf.length/2];
+            }else{
+                return (lastHalf[lastHalf.length / 2] + lastHalf[lastHalf.length / 2 - 1]) / 2.0;
+            }
+
+
         }
     }
 
@@ -86,7 +112,7 @@ public class StatsCalculator {
         sortData();
         int inx = 0;
         if (sortedValues.length % 2 == 1) {
-            return sortedValues[sortedValues.length/2];
+            return sortedValues[sortedValues.length/2+1];
         } else  {
             double num= sortedValues[(sortedValues.length) / 2-1] + sortedValues[(sortedValues.length) / 2 ];
             num=num/2;
