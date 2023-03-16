@@ -1,30 +1,51 @@
 import java.util.Arrays;
+/**
+        * @file StatsCalculator.java
+        * @author Gracie Gabel
+        * @date 3/15/2023
+        * @description creates an array based on the tester file in a constructor and if given no array has a defualt constructor.
+        * can find the five number summary of the double array with various different methods and can do much more!
+        */
 public class StatsCalculator {
 
-    //values - a private array of doubles. This array must always stay the same and not be modified.
+    //private arrays;
     private double[] values;
-    //sortedValues - a private array that contains the sorted values
     private double[] sortedValues;
 
-    //StatsCalculator() - default constructor makes an array of size 20 full of 0s
+    /**
+     * @descripton StatsCalculator() - default constructor makes an array of size 20 full of 0s
+     */
+
     public StatsCalculator() {
 
         values = new double[20];
     }
 
-    //StatsCalculator(double [ ] values) - overloaded constructor that sets instance variable equal to the parameter
+    /**
+     *
+     * @param value which represent the array being taken in and set equal to
+     * @var values.
+     * @description this sets the value of that array to the array in the class, so it can be used.
+     */
+
     public StatsCalculator(double[] value) {
         values = value;
     }
 
-    //public void sortData() - sorts the data
+    /**
+     * @description sorts the data and stores the data in the array
+     * sortedValues.
+     */
     public void sortData() {
         sortedValues = values;
         Arrays.sort(sortedValues);
 
     }
 
-    //public double calculateMax() - find the maximum value in the array
+    /**
+     * @description uses a for loop to iterate through the values array to find the max.
+     * @returns the Max double in the values array.
+     */
     public double calculateMax() {
         double max = values[0];
         for (int i = 0; i < values.length; i++) {
@@ -35,7 +56,10 @@ public class StatsCalculator {
         return max;
     }
 
-    //public double calculateMin() - finds the minimum value in the array
+    /**
+     * @description uses a for loop to iterate through the values array to find the min.
+     * @returns the Min double in the values array.
+     */
     public double calculateMin() {
         double min = values[0];
         for (int i = 0; i < values.length; i++) {
@@ -46,20 +70,15 @@ public class StatsCalculator {
         return min;
     }
 
-    //public double calculateFirstQuartile() - finds the value of the first quartile. Please note that I exclude the median for calculating the quartiles
+    /**
+     * @description sorts the array and finds the first quartile within the array sortedValues.
+     * @returns the first quartile value within the array sortedValues.
+     */
     public double calculateFirstQuartile() {
         sortData();
         int index = 0;
         double[] firstHalf;
-        if (sortedValues.length % 2 == 1) {
-            firstHalf = new double[sortedValues.length / 2];
-            for (int i = 0; i < firstHalf.length; i++) {
-                firstHalf[i] = sortedValues[i];
-            }
-            return (firstHalf[firstHalf.length / 2] + firstHalf[firstHalf.length / 2 - 1]) / 2.0;
 
-
-        } else {
             firstHalf = new double[sortedValues.length / 2];
             for (int i = 0; i < firstHalf.length - 1; i++) {
                 firstHalf[i] = sortedValues[i];}
@@ -71,9 +90,12 @@ public class StatsCalculator {
 
 
         }
-    }
 
-    //public double calculateThirdQuartile() - finds the value of the third quartile. Please note that I exclude the median for calculating the quartiles
+
+    /**
+     * @description sorts the array and finds the third quartile within the array sortedValues
+     * @returns value of the third quartile with in the array sortedValues.
+     */
     public double calculateThirdQuartile() {
         sortData();
 
@@ -85,7 +107,12 @@ public class StatsCalculator {
                 lastHalf[indxLast] = sortedValues[i];
                 indxLast++;
             }
-            return (lastHalf[lastHalf.length/2]+lastHalf[lastHalf.length/2-1])/2;
+            if(lastHalf.length%2==1) {
+                return lastHalf[lastHalf.length/2];
+            }else{
+                return (lastHalf[lastHalf.length/2]+lastHalf[lastHalf.length/2-1])/2;
+            }
+
 
 
         } else  {
@@ -104,24 +131,26 @@ public class StatsCalculator {
 
         }
     }
-
-
-
-    //public double calculateMedian() - finds the value of the median
+    /**
+     * @descripton sorts the data and then calculates the median within the sortedValues array.
+     * @return the median within the sortedValues array.
+     */
     public double calculateMedian() {
         sortData();
         int inx = 0;
         if (sortedValues.length % 2 == 1) {
-            return sortedValues[sortedValues.length/2+1];
+            return sortedValues[sortedValues.length/2];
         } else  {
-            double num= sortedValues[(sortedValues.length) / 2-1] + sortedValues[(sortedValues.length) / 2 ];
-            num=num/2;
-            return num;
+            return (sortedValues[sortedValues.length / 2-1] + sortedValues[sortedValues.length/ 2 ])/2.0;
+
         }
 
     }
 
-    //public double calculateSum() - finds the sum of the array
+    /**
+     * @description adds all the values together and
+     * @returns the sum.
+     */
     public double calculateSum() {
         double sum = 0;
         for (int i = 0; i < values.length; i++) {
@@ -130,19 +159,26 @@ public class StatsCalculator {
         return sum;
     }
 
-    //public double calculateMean() - find the mean of the array
+    /**
+     * @description calculates the mean by using the calculateSum() method and dividing it my the length of the array.
+     * @return the Mean of the array.
+     */
     public double calculateMean() {
         return calculateSum() / values.length;
     }
 
-    //public void print() - prints the data in a single line. Must use an enhanced for loop
+    /**
+     * @description prints out all the data in the array a single line with spaces in between.
+     */
     public void print() {
         for (double i : values) {
             System.out.print(i+" ");
         }
     }
 
-    //public void printSorted() - prints the sorted data in a single line. Must use an enhanced for loop
+    /**
+     * @description prints out all the data within the array with spaces in between, but sorted.
+     */
     public void printSorted() {
         System.out.println();
         for (double i : sortedValues) {
@@ -150,7 +186,11 @@ public class StatsCalculator {
         }
     }
 
-    //public void printFiveNumberSummary() - prints the five number summary as shown below.
+    /**
+     * @description prints out the five number summary tabbed
+     * (min,first quartile, median, third quartile, and max)
+     * with each value on another line.
+     */
     public void printFiveNumberSummary() {
         System.out.println();
         System.out.println("\tMinimum: " + calculateMin());
