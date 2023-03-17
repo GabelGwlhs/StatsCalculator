@@ -193,6 +193,7 @@ public class StatsCalculator {
      */
     public void printFiveNumberSummary() {
         System.out.println();
+        System.out.println("The five number summary is:");
         System.out.println("\tMinimum: " + calculateMin());
         System.out.println("\tFirst Quartile: " + calculateFirstQuartile());
         System.out.println("\tMedian: " + calculateMedian());
